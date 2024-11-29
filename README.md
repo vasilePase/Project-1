@@ -1,2 +1,2 @@
 # FirstProject
-new repo 1
+This is my project
