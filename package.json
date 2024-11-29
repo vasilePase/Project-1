@@ -1,12 +1,14 @@
 {
   "name": "firstproject",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "new repo",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.1"
+  }
 }
