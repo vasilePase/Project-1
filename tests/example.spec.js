@@ -1,5 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const { pageActions } = require('../pageAction/pageActions');
+const path = require('path');
 const exp = require('constants');
 
 test.beforeEach(async({page}) => {
@@ -40,7 +41,7 @@ test('load Delays', async({ page }) => {
 test('AJAX data', async({page}) => {
   await pageActions.clickOnTheHrefLink(page, '/ajax');
   await pageActions.clickOnTheButton(page, '#ajaxButton');
-  await page.waitForSelector('.bg-success')
+  await page.waitForSelector('.bg-success');
   await expect(page.locator('.bg-success')).toContainText('Data loaded with AJAX get request.');
 })
 
@@ -219,4 +220,13 @@ await new Promise((resolve) => {
 });
 
 console.log('All dialogs processed, continuing...');*/
+});
+
+test('File Upload', async({page}) =>{
+  await pageActions.clickOnTheHrefLink(page, '/upload');
+  const iframeLocator = page.frameLocator('iframe').getByText('Browse files');
+  await iframeLocator.setInputFiles(path.join(__dirname, '../files/test.docx'));
+  const successUpload = page.locator('iframe').contentFrame().locator('.success-file');
+  await expect(successUpload).toContainText('1 file(s) selected');
+  await page.locator('iframe').contentFrame().locator('.file-actions').click();
 });
